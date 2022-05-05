@@ -9,6 +9,12 @@ NAOJ(National Astronomical Observatory of Japan)
 ```
 npm run fetch:holidays 2022
 # /data/2022/holidays.json
+# [{
+#   name: '元旦',
+#   year: 2022,
+#   month: 1,
+#   date: 1,
+# }, ...]
 
 npm run fetch:synodicmonth 2022
 # /data/2022/synodicmonth.json
