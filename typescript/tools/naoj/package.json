@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "fetch:holidays": "echo fetch:holidays",
+    "fetch:synodicmonth": "echo fetch:synodicmonth",
+    "fetch:solarterms": "echo fetch:solarterms",
+    "fetch:specialterms": "echo fetch:specialterms"
   },
   "keywords": [],
   "author": "",
