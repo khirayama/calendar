@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "fetch:holidays": "echo fetch:holidays",
+    "fetch:holidays": "ts-node holidays.ts",
     "fetch:synodicmonth": "echo fetch:synodicmonth",
     "fetch:solarterms": "echo fetch:solarterms",
     "fetch:specialterms": "echo fetch:specialterms"
