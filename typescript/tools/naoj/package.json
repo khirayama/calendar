@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "fetch:holidays": "ts-node holidays.ts",
-    "fetch:synodicmonth": "echo fetch:synodicmonth",
-    "fetch:solarterms": "echo fetch:solarterms",
-    "fetch:specialterms": "echo fetch:specialterms"
+    "fetch:newmoons": "ts-node newmoons.ts",
+    "fetch:terms": "ts-node terms.ts"
   },
   "keywords": [],
   "author": "",
