@@ -7,6 +7,7 @@ NAOJ(National Astronomical Observatory of Japan)
 ## 使用例
 
 ```
+# 祝日を取得する
 npm run fetch:holidays 2022
 # /data/2022/holidays.json
 # [{
@@ -16,14 +17,25 @@ npm run fetch:holidays 2022
 #   date: 1,
 # }, ...]
 
-npm run fetch:synodicmonth 2022
-# /data/2022/synodicmonth.json
+# 朔望月(朔)を取得する
+npm run fetch:newmoons 2022
+# /data/2022/newmoons.json
+# [{
+#   year: 2022,
+#   month: 1,
+#   date: 1,
+# }, ...]
 
-npm run fetch:solarterms 2022
-# /data/2022/solarterms.json
-
-npm run fetch:specialterms 2022
-# /data/2022/spcialterms.json
+# 二十四節気と雑節を取得する
+npm run fetch:terms 2022
+# /data/2022/terms.json
+# [{
+#   name: '小寒',
+#   category: '二十四節気',
+#   year: 2022,
+#   month: 1,
+#   date: 1,
+# }, ...]
 ```
 
 ## 用語集
