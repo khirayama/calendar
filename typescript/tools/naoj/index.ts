@@ -65,6 +65,7 @@ type NewMoon = {
 export async function fetchNewMoons(year: number): Promise<NewMoon[]> {
   const y = String(year);
   const url = `https://eco.mtk.nao.ac.jp/koyomi/yoko/${y}/rekiyou${y.slice(2)}3.html`;
+  console.log(`${year}: fetch to ${url}.`);
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
