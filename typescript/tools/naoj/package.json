@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "fetch:holidays": "ts-node holidays.ts",
-    "fetch:newmoons": "ts-node newmoons.ts",
-    "fetch:terms": "ts-node terms.ts"
+    "fetch:holidays": "ts-node cli.ts holidays",
+    "fetch:newmoons": "ts-node cli.ts newmoons",
+    "fetch:terms": "ts-node cli.ts terms"
   },
   "keywords": [],
   "author": "",
