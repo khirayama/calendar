@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "fetch": "ts-node cli.ts all",
     "fetch:holidays": "ts-node cli.ts holidays",
     "fetch:newmoons": "ts-node cli.ts newmoons",
     "fetch:terms": "ts-node cli.ts terms"

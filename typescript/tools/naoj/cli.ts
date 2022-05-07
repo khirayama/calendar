@@ -27,6 +27,15 @@ import {saveFile, fetchHolidays, fetchNewMoons, fetchTerms} from './index';
     const terms = await fetchTerms(year);
     saveFile(year, 'terms.json', terms);
   } else if (resource === 'terms') {
+  } else if (resource === 'all') {
+    const holidays = await fetchHolidays(year);
+    saveFile(year, 'holidays.json', holidays);
+
+    const newMoons = await fetchNewMoons(year);
+    saveFile(year, 'newmoons.json', newMoons);
+
+    const terms = await fetchTerms(year);
+    saveFile(year, 'terms.json', terms);
   } else {
     throw new Error('no resources');
     return;
