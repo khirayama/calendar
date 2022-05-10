@@ -15,6 +15,18 @@ type Holiday struct {
 	Date  int    `json:"date"`
 }
 
+func LoadJSONFile[T Holiday](year int, fileName string) []T {
+	raw, err := ioutil.ReadFile("../../../data/" + strconv.Itoa(year) +"/" + fileName)
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+
+	var data []T
+	json.Unmarshal(raw, &data)
+  return data
+}
+
 func LoadHolidays(year int) []Holiday {
 	raw, err := ioutil.ReadFile("../../../data/" + strconv.Itoa(year) +"/holidays.json")
 	if err != nil {
@@ -32,4 +44,6 @@ func main() {
 	fmt.Println(holidays2022)
   var holidays2023 = LoadHolidays(2023)
 	fmt.Println(holidays2023)
+  var holidays2021 = LoadJSONFile(2021, "holidays.json")
+	fmt.Println(holidays2021)
 }
