@@ -15,7 +15,13 @@ type Holiday struct {
 	Date  int    `json:"date"`
 }
 
-func LoadJSONFile[T Holiday](year int, fileName string) []T {
+type NewMoon struct {
+	Year  int    `json:"year"`
+	Month int    `json:"month"`
+	Date  int    `json:"date"`
+}
+
+func LoadJSONFile[T Holiday | NewMoon](year int, fileName string) []T {
 	raw, err := ioutil.ReadFile("../../../data/" + strconv.Itoa(year) +"/" + fileName)
 	if err != nil {
 		fmt.Println(err.Error())
