@@ -50,6 +50,6 @@ func main() {
 	fmt.Println(holidays2022)
   var holidays2023 = LoadHolidays(2023)
 	fmt.Println(holidays2023)
-  var holidays2021 = LoadJSONFile(2021, "holidays.json")
+  var holidays2021 = LoadJSONFile[Holiday](2021, "holidays.json")
 	fmt.Println(holidays2021)
 }
