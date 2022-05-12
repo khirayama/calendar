@@ -40,23 +40,9 @@ func LoadJSONFile[T Holiday | NewMoon | Term](year int, fileName string) []T {
   return data
 }
 
-func LoadHolidays(year int) []Holiday {
-	raw, err := ioutil.ReadFile("../../../data/" + strconv.Itoa(year) +"/holidays.json")
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-
-	var holidays []Holiday
-	json.Unmarshal(raw, &holidays)
-  return holidays
-}
-
 func main() {
-  var holidays2022 = LoadHolidays(2022)
-	fmt.Println(holidays2022)
-  var holidays2023 = LoadHolidays(2023)
-	fmt.Println(holidays2023)
-  var holidays2021 = LoadJSONFile[Holiday](2021, "holidays.json")
-	fmt.Println(holidays2021)
+  var terms = LoadJSONFile[Term](2021, "terms.json")
+  var newmoons = LoadJSONFile[NewMoon](2021, "newmoons.json")
+	fmt.Println(terms)
+	fmt.Println(newmoons)
 }
