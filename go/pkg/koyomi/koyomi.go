@@ -74,8 +74,76 @@ func LoadJSONFile[T Holiday | NewMoon | Term](year int, fileName string) []T {
 	}
 
 	var data []T
-	json.Unmarshal(raw, &data)
-  return data
+	json.Unmarshal(content, &data)
+	return data
+}
+
+func koyomi(t time.Time) {
+	year := t.Year()
+	month := int(t.Month())
+	day := t.Day()
+
+	var kyurekiYear int = year // TODO
+	var kyurekiMonth int = 111
+	var kyurekiDate int
+
+	var newmoons = append(
+		LoadJSONFile[NewMoon](year-1, "newmoons.json"),
+		LoadJSONFile[NewMoon](year, "newmoons.json")...,
+	)
+	var terms = append(
+		LoadJSONFile[Term](year-1, "terms.json"),
+		LoadJSONFile[Term](year, "terms.json")...,
+	)
+	var chuki []Term
+	for _, term := range terms {
+		for _, chukiName := range chukiNames {
+			if chukiName == term.Name {
+				chuki = append(chuki, term)
+				break
+			}
+		}
+	}
+	var newmoon time.Time
+	var nextNewmoon time.Time
+	for i := 0; i < len(newmoons)-1; i += 1 {
+		d0 := time.Date(newmoons[i].Year, time.Month(newmoons[i].Month), newmoons[i].Date, 0, 0, 0, 0, JST)
+		d1 := time.Date(newmoons[i+1].Year, time.Month(newmoons[i+1].Month), newmoons[i+1].Date, 0, 0, 0, 0, JST)
+		if t.Equal(d0) || (t.After(d0) && t.Before(d1)) {
+			newmoon = d0
+			nextNewmoon = d1
+			break
+		}
+	}
+	diff := t.Sub(newmoon).Hours() / 24
+	kyurekiDate = 1 + int(diff)
+
+	isLeapMonth := true
+	for i := 0; i < len(chuki)-1; i += 1 {
+		c := time.Date(chuki[i].Year, time.Month(chuki[i].Month), chuki[i].Date, 0, 0, 0, 0, JST)
+		if c.Equal(newmoon) || (c.After(newmoon) && c.Before(nextNewmoon)) {
+			for m, chukiName := range chukiNames {
+				if chuki[i].Name == chukiName {
+					kyurekiMonth = m + 1
+					isLeapMonth = false
+					break
+				}
+			}
+			break
+		} else if c.After(nextNewmoon) || c.Equal(nextNewmoon) {
+			for m, chukiName := range chukiNames {
+				if chuki[i].Name == chukiName {
+					kyurekiMonth = m
+					break
+				}
+			}
+			break
+		}
+	}
+
+	rokuyo := rokuyoNames[(kyurekiMonth+kyurekiDate+4)%6]
+
+	fmt.Println(year, month, day, "/", kyurekiYear, kyurekiMonth, kyurekiDate, isLeapMonth, rokuyo)
 }
 
 func main() {
