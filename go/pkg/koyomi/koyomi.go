@@ -31,6 +31,30 @@ type Term struct {
 	Date  int    `json:"date"`
 }
 
+var chukiNames = []string{
+	"雨水",
+	"春分",
+	"穀雨",
+	"小満",
+	"夏至",
+	"大暑",
+	"処暑",
+	"秋分",
+	"霜降",
+	"小雪",
+	"冬至",
+	"大寒",
+}
+
+var rokuyoNames = []string{
+	"先勝",
+	"友引",
+	"先負",
+	"仏滅",
+	"大安",
+	"赤口",
+}
+
 func LoadJSONFile[T Holiday | NewMoon | Term](year int, fileName string) []T {
 	raw, err := ioutil.ReadFile("../../../data/" + strconv.Itoa(year) +"/" + fileName)
 	if err != nil {
