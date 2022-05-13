@@ -6,7 +6,10 @@ import (
 	"io/ioutil"
 	"os"
 	"strconv"
+	"time"
 )
+
+var JST, _ = time.LoadLocation("Asia/Tokyo")
 
 type Holiday struct {
 	Name  string `json:"name"`
