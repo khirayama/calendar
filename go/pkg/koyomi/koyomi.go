@@ -19,9 +19,9 @@ type Holiday struct {
 }
 
 type NewMoon struct {
-	Year  int    `json:"year"`
-	Month int    `json:"month"`
-	Date  int    `json:"date"`
+	Year  int `json:"year"`
+	Month int `json:"month"`
+	Date  int `json:"date"`
 }
 
 type Term struct {
