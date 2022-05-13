@@ -55,11 +55,22 @@ var rokuyoNames = []string{
 	"赤口",
 }
 
+var JSONFileCache = make(map[string][]byte)
+
 func LoadJSONFile[T Holiday | NewMoon | Term](year int, fileName string) []T {
-	raw, err := ioutil.ReadFile("../../../data/" + strconv.Itoa(year) +"/" + fileName)
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
+	var content []byte
+	k := strconv.Itoa(year) + fileName
+	raw, ok := JSONFileCache[k]
+	if !ok {
+		raw, err := ioutil.ReadFile("../../../data/" + strconv.Itoa(year) + "/" + fileName)
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+		content = raw
+		JSONFileCache[k] = content
+	} else {
+		content = raw
 	}
 
 	var data []T
