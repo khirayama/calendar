@@ -1,4 +1,4 @@
-NAOJ(National Astronomical Observatory of Japan)
+# NAOJ(National Astronomical Observatory of Japan)
 
 このツールでは、日本の祝日、朔望月、二十四節気、雑節をnaojより取得することを目的とします。
 国立天文台では、上記情報を翌年まで掲載しており、定期的に取得します。
