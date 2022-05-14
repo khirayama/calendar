@@ -163,10 +163,20 @@ func NewKyureki(t time.Time) Kyureki {
 			break
 		}
 	}
+	if kyurekiMonth == 0 {
+		kyurekiMonth = 12
+		isLeapMonth = false
+	}
 
 	rokuyo := rokuyoNames[(kyurekiMonth+kyurekiDate+4)%6]
 
-	fmt.Println(year, month, day, "/", kyurekiYear, kyurekiMonth, kyurekiDate, isLeapMonth, rokuyo)
+	return Kyureki{
+		kyurekiYear,
+		kyurekiMonth,
+		kyurekiDate,
+		isLeapMonth,
+		rokuyo,
+	}
 }
 
 func main() {
