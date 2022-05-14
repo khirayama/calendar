@@ -1,4 +1,4 @@
-package main
+package koyomi
 
 import (
 	"encoding/json"
