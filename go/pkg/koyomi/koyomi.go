@@ -31,6 +31,14 @@ type Term struct {
 	Date  int    `json:"date"`
 }
 
+type Kyureki struct {
+	Year   int
+	Month  int
+	Date   int
+	IsLeap bool
+	Rokuyo string
+}
+
 var chukiNames = []string{
 	"雨水",
 	"春分",
@@ -78,13 +86,13 @@ func LoadJSONFile[T Holiday | NewMoon | Term](year int, fileName string) []T {
 	return data
 }
 
-func koyomi(t time.Time) {
+func NewKyureki(t time.Time) Kyureki {
 	year := t.Year()
-	month := int(t.Month())
-	day := t.Day()
+	// month := int(t.Month())
+	// day := t.Day()
 
-	var kyurekiYear int = year // TODO
-	var kyurekiMonth int = 111
+	var kyurekiYear int = year
+	var kyurekiMonth int = 0
 	var kyurekiDate int
 
 	var newmoons = append(
@@ -106,9 +114,14 @@ func koyomi(t time.Time) {
 	}
 	var newmoon time.Time
 	var nextNewmoon time.Time
-	for i := 0; i < len(newmoons)-1; i += 1 {
+	for i := 0; i < len(newmoons); i += 1 {
 		d0 := time.Date(newmoons[i].Year, time.Month(newmoons[i].Month), newmoons[i].Date, 0, 0, 0, 0, JST)
-		d1 := time.Date(newmoons[i+1].Year, time.Month(newmoons[i+1].Month), newmoons[i+1].Date, 0, 0, 0, 0, JST)
+		var d1 time.Time
+		if i == len(newmoons)-1 {
+			d1 = time.Date(t.Year()+1, 1, 1, 0, 0, 0, 0, JST)
+		} else {
+			d1 = time.Date(newmoons[i+1].Year, time.Month(newmoons[i+1].Month), newmoons[i+1].Date, 0, 0, 0, 0, JST)
+		}
 		if t.Equal(d0) || (t.After(d0) && t.Before(d1)) {
 			newmoon = d0
 			nextNewmoon = d1
@@ -119,11 +132,16 @@ func koyomi(t time.Time) {
 	kyurekiDate = 1 + int(diff)
 
 	isLeapMonth := true
-	for i := 0; i < len(chuki)-1; i += 1 {
+	for i := 0; i < len(chuki); i += 1 {
 		c := time.Date(chuki[i].Year, time.Month(chuki[i].Month), chuki[i].Date, 0, 0, 0, 0, JST)
 		if c.Equal(newmoon) || (c.After(newmoon) && c.Before(nextNewmoon)) {
 			for m, chukiName := range chukiNames {
 				if chuki[i].Name == chukiName {
+					if chukiName == chukiNames[len(chukiNames)-1] {
+						kyurekiYear = chuki[i].Year - 1
+					} else {
+						kyurekiYear = chuki[i].Year
+					}
 					kyurekiMonth = m + 1
 					isLeapMonth = false
 					break
@@ -133,6 +151,11 @@ func koyomi(t time.Time) {
 		} else if c.After(nextNewmoon) || c.Equal(nextNewmoon) {
 			for m, chukiName := range chukiNames {
 				if chuki[i].Name == chukiName {
+					if chukiName == chukiNames[len(chukiNames)-1] {
+						kyurekiYear = chuki[i].Year - 1
+					} else {
+						kyurekiYear = chuki[i].Year
+					}
 					kyurekiMonth = m
 					break
 				}
