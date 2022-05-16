@@ -178,10 +178,3 @@ func NewKyureki(t time.Time) Kyureki {
 		rokuyo,
 	}
 }
-
-func main() {
-  var terms = LoadJSONFile[Term](2021, "terms.json")
-  var newmoons = LoadJSONFile[NewMoon](2021, "newmoons.json")
-	fmt.Println(terms)
-	fmt.Println(newmoons)
-}
