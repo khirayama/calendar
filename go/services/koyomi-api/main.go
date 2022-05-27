@@ -74,7 +74,8 @@ func writeJSON(w http.ResponseWriter, code int, data interface{}) {
 
 func (s *Server) listHolidays() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		writeJSON(w, http.StatusOK, M{"data": "Hello"})
+		d := []string{"a", "b", "c"}
+		writeJSON(w, http.StatusOK, M{"data": d})
 	}
 }
 
