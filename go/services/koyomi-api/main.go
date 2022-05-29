@@ -55,7 +55,6 @@ func (s *Server) routes() {
 
 	noAuth := apiRouter.PathPrefix("").Subrouter()
 	{
-		// noAuth.Handle("/health", healthCheck())
 		noAuth.Handle("/holidays", s.listHolidays()).Methods("GET")
 	}
 }
