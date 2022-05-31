@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -42,6 +44,12 @@ func (s *Server) Run(port string) error {
 	s.server.Addr = port
 	log.Printf("server starting on %s", port)
 	return s.server.ListenAndServe()
+}
+
+func Logger(w io.Writer) func(h http.Handler) http.Handler {
+	return (func(h http.Handler) http.Handler {
+		return handlers.LoggingHandler(w, h)
+	})
 }
 
 type config struct {
