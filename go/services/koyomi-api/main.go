@@ -58,7 +58,7 @@ type config struct {
 
 func (s *Server) routes() {
 	s.router.Use(cors.AllowAll().Handler)
-	// s.router.Use(Logger(os.Stdout))
+	s.router.Use(Logger(os.Stdout))
 	apiRouter := s.router.PathPrefix("/api/v1").Subrouter()
 
 	noAuth := apiRouter.PathPrefix("").Subrouter()
